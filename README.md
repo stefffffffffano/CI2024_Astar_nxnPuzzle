@@ -156,4 +156,76 @@ In order to report results, I decided to execute the algorithm for n>=2 and n<8 
 | 7         | 790                                                      | 1139539                            |  
 
 
-Resuming what I was saying before with respect to the 7x7 instance, I let the algorithm run till the end the five instances and it was always able to find a solution. Out of fairness, again, there have been times in which the execution took approximately 10 minutes on my laptop evaluating more than 3 millions states.
+Resuming what I was saying before with respect to the 7x7 instance, I let the algorithm run till the end the five instances and it was always able to find a solution. Out of fairness, again, there have been times in which the execution took approximately 10 minutes on my laptop evaluating more than 3 millions states.  
+
+# Review Lab 3
+
+For what concerns the review process of lab3, I was assigned two repositories of two collegues. I will report my review for both of them.  
+The first review is done for the code delivered by MarilenaDel.  
+She delivered a well structured version of A* algorithm, specifically using the Manhattan distance as heuristic function. Here is my review for her code:  
+
+``` 
+First of all, I would like to highlight the clairity and the structure of the code. It was really easy to go through it and understand all the details.
+
+Then, the implementation of the A* algorithm seems correct to me and it is also efficient making use of priority queues (heapq) to manage the open list and a set for the closed set, ensuring quick lookups and preventing redundant state evaluation. The use of tobytes for storing state representations is a clever way to handle immutability and efficient comparison in the closed set.
+
+Thus, I have nothing to report with respect to the implementation of the A* algorithm and the chosen strategy in general, as suggested by the professor, this is the best informed strategy when dealing with path search.
+
+Therefore, the only enhancement I can suggest is related to the heuristic you decided to use. As you stated in the readme, it is admissible, thus it always leads to the shortest path, but yet it evaluates a huge number of states. Even if you didn't report the result obtained with your algorithm, I suppose (from my experiments) it is not able to find a solution in a reasonable time for instances larger than 3. In order to make it feasible, I suggest you to change the heuristic when the square grows. In particular, when the heuristic overestimates the length of the path, the number of evaluated states decreases a lot!
+
+For instance, if you want to have a look at my code, I combined three different heuristics: manhattan (that you used as well), linear conflict and walking distance. I used this approach only for n>=4 and, thanks to an additional multiplication factor, I was able to solve squares up to dimension 6 (unfortunately, the solution is not the optimal one.. but you can't get everything!).
+
+The approach you used is the same I used for instances with n<=3, so I perfectly agree with the choice. I hope that my suggestions could be useful to enhance even more the current performance of your A* algorithm.
+
+```   
+Since I found the solution very well structured and efficient, I only tried to propose an enhancement to give her the possibility to solve greater instances.   
+
+
+For what concerns the other review, it was done for the code delivered by yuripettorossi. Here is my review:  
+
+``` 
+I tried to go through the code of the delivered solution, I have to say that it took a lot of time to do it because there are a lot of unused functions and duplicates, that result in many lines of code not easy to be read. Anyway, I tried both the strategies that you delivered, even if my code was slightly different. If you want to keep focusing on that strategies (BFS and Bi-Directional Search), the only suggestion I can give you is to use memory in a more efficient way. You are currently using a list of lists to store already visited states, which is really costly and expensive also from the computational point of view. Try instead to use tobytes to hash already visited states, it is faster!
+
+However, to be honest, I would suggest you to go back to the A* that you left in 'tests' and re-start from that. The same suggestion I gave you for the BFS can be applied to the A* and, enhancing it with an heap to store not only states but also the costs, is even better!
+
+Now, in the provided solution, you are using an approach that does not allow you to find the optimal solution even for smaller instances, but still evaluates a large number of states. You can do something similar with A*, obtaining better results (closer to the optimum) and with a lower number of states evaluated. Indeed, if the heuristic is not admissible anymore, and you start overestimating for a minimization problem like this, the number of evaluated states gets lower. Try to combine more than one heuristic in the A*. I have seen you are currently using the manhattan distance, try to sum it to some other heuristic (walking distance and so on...). By overestimating, obviously you are not finding the optimum anymore, but, in any case, the same happens with BFS, but you should obtain something better both in terms of execution times and cost.
+
+I hope that my suggestions will be useful to enhance the performance of your algorithms!
+```   
+
+In this case I tried to suggest another strategy with respect to the two tried by the author (that are reported in the review itself). I tried both of them and then changed approach because they were not able so solve even very small instances in a reasonable time. Moreover, in my opinion, the usage of data structures was not efficient, which can result in even more time in order to perform exectuion. So, I wouldn't know how to make them better rather than the suggestion I gave. Thus, as done in class, I tried to propose another algorithm to make it better.  
+
+# Review for my code of Lab 3  
+
+Here are the two reviews I received for my code, I really appreciated the comments of my collegues, even if there were no suggestions to further enhance the algorithm (except for a suggestion to report results in the README in a different way).  
+
+```  
+The structure of the repository is very clear and it helps in understanding the implementation of the code.
+
+I will not review the implementation of the code, since your results were better than mine, both in term of quality and dimension of puzzle solved, and I would not have anything to suggest to help you improve the performances.
+
+I think the implementation of different heuristics, to reduce the number of visited states, to find the solution without wasting resources, is the key part of your work. I will definitely try to implement some of those heuristics in my project, as you suggested in your review.
+
+In general, I find your work very good.
+The only small detail I would change is related to the results.
+Since you have already simulated 5 different solves, it would may be a good idea to compute the average of the different solutions, to give a more general overview of the problem, rather than the best case scenario.
+Or even compute the average leaving out the best and the worst case, like in the official puzzle-solving competitions.
+As I mentioned, it is just a minor change, but since your solution was already very good, it may interest you.
+
+
+```     
+First of all, I have to thank you for the exhaustive description in the readme. Everything is clear and I don't even need to look at the code trying to decifrate it 🤣 .
+I went through a similar process: using admissible heuristics was unfeasible for big instances of the problem, so I also found a way to violate the constraint and still get a good result (I elevated the Manhattan distance to an exponent that gest gradually bigger as the number of evaluated states grows, you can find it here).
+Out of the three heuristics you used, I find heuristic_linear_conflict really interesting as I never thought of it during my attempts to find new heuristics.
+The usage of the byte representation instead of hashing is certainly one thing that I can copy in my implementation to speed it up without changing the structure of the code. Thanks.
+```  
+
+
+
+
+```    
+
+
+
+
+
